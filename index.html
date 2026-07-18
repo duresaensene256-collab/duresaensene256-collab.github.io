@@ -3,225 +3,381 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Duresa Ensene | Senior Data Engineer & BI Specialist</title>
+    <title>Duresa Ensene | Enterprise Data Engineer & Solutions Architect</title>
     <style>
         :root {
-            --primary: #0f172a;
-            --secondary: #2563eb;
-            --text-dark: #1e293b;
-            --text-light: #64748b;
-            --bg-light: #f8fafc;
+            --bg-base: #05070f;
+            --bg-surface: #0c1020;
+            --bg-card: rgba(17, 24, 43, 0.75);
+            --color-primary: #3b82f6; /* Global Blue */
+            --color-emerald: #10b981; /* Scale Green */
+            --text-primary: #f9fafb;
+            --text-secondary: #9ca3af;
+            --border-glow: rgba(59, 130, 246, 0.15);
+            --border-subtle: rgba(255, 255, 255, 0.06);
         }
         
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            scroll-behavior: smooth;
         }
 
         body {
-            background-color: #ffffff;
-            color: var(--text-dark);
+            background-color: var(--bg-base);
+            color: var(--text-primary);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
+        /* Hero Terminal Section */
         header {
-            background-color: var(--primary);
-            color: white;
-            padding: 60px 20px;
+            min-height: 75vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
+            background: 
+                radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.18), transparent 50%),
+                radial-gradient(circle at 20% 80%, rgba(16, 185, 129, 0.1), transparent 50%),
+                linear-gradient(var(--bg-base), var(--bg-base));
+            padding: 60px 20px;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .status-badge {
+            background: rgba(16, 185, 129, 0.08);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: #34d399;
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
         }
 
         header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            letter-spacing: -0.5px;
+            font-size: 4rem;
+            font-weight: 900;
+            letter-spacing: -1.5px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ffffff 30%, #93c5fd 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         header p {
-            font-size: 1.2rem;
-            color: #94a3b8;
-            margin-bottom: 20px;
+            font-size: 1.35rem;
+            color: var(--text-secondary);
+            max-width: 750px;
+            margin-bottom: 35px;
+            font-weight: 400;
         }
 
-        .contact-links a {
-            color: #38bdf8;
+        .cta-group a {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 8px;
             text-decoration: none;
-            margin: 0 10px;
-            font-weight: bold;
+            font-weight: 600;
+            font-size: 1rem;
+            margin: 8px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-primary {
+            background: var(--color-primary);
+            color: white;
+            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-secondary {
+            background: var(--bg-card);
+            color: var(--text-primary);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--color-primary);
+            transform: translateY(-2px);
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 1140px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 80px 20px;
         }
 
         section {
-            margin-bottom: 40px;
+            margin-bottom: 100px;
         }
 
         h2 {
-            font-size: 1.8rem;
-            border-bottom: 3px solid var(--secondary);
-            padding-bottom: 5px;
-            margin-bottom: 20px;
-            color: var(--primary);
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 40px;
+            background: linear-gradient(to right, #ffffff, #cbd5e1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .skills-grid {
+        /* Multi-Column Architecture Matrix */
+        .matrix-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
-            margin-top: 15px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
         }
 
-        .skill-card {
-            background: var(--bg-light);
-            padding: 15px;
-            border-left: 4px solid var(--secondary);
+        .matrix-box {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            padding: 35px;
+            border-radius: 14px;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
+            transition: border-color 0.3s;
+        }
+
+        .matrix-box:hover {
+            border-color: var(--border-glow);
+        }
+
+        .matrix-box h3 {
+            color: var(--color-primary);
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tech-pill {
+            display: inline-block;
+            background: rgba(37, 99, 235, 0.06);
+            border: 1px solid rgba(37, 99, 235, 0.15);
+            color: #93c5fd;
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin: 4px;
+        }
+
+        /* Production Architecture Showcase */
+        .project-flex {
+            display: flex;
+            flex-direction: column;
+            gap: 35px;
+        }
+
+        .architecture-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .architecture-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--color-primary);
+        }
+
+        .architecture-card.concept::before {
+            background: var(--color-emerald);
+        }
+
+        .card-header-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+            gap: 15px;
+        }
+
+        .sys-status {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 4px 10px;
             border-radius: 4px;
         }
 
-        .skill-card h3 {
+        .status-prod { background: rgba(59, 130, 246, 0.1); color: #60a5fa; }
+        .status-arch { background: rgba(16, 185, 129, 0.1); color: #34d399; }
+
+        .architecture-card h3 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 12px;
+        }
+
+        .architecture-card p {
+            color: var(--text-secondary);
             font-size: 1.1rem;
-            margin-bottom: 8px;
+            margin-bottom: 25px;
+            text-align: justify;
         }
 
-        .project-card {
-            background: white;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 25px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        .spec-list {
+            list-style: none;
         }
 
-        .project-card h3 {
-            color: var(--secondary);
-            margin-bottom: 10px;
+        .spec-list li {
+            position: relative;
+            padding-left: 24px;
+            margin-bottom: 12px;
+            color: #d1d5db;
+            font-size: 1rem;
         }
 
-        .tag {
-            display: inline-block;
-            background: #dbeafe;
-            color: #1e40af;
-            font-size: 0.85rem;
-            padding: 3px 10px;
-            border-radius: 12px;
-            margin-right: 5px;
-            margin-bottom: 10px;
-            font-weight: 500;
-        }
-
-        .job-meta {
-            display: flex;
-            justify-content: space-between;
+        .spec-list li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--color-primary);
             font-weight: bold;
-            margin-bottom: 10px;
-            color: var(--text-dark);
         }
 
-        ul {
-            padding-left: 20px;
-        }
-
-        li {
-            margin-bottom: 8px;
+        .architecture-card.concept .spec-list li::before {
+            color: var(--color-emerald);
         }
 
         footer {
-            background: var(--primary);
-            color: #94a3b8;
+            border-top: 1px solid var(--border-subtle);
             text-align: center;
-            padding: 20px;
+            padding: 40px 20px;
+            color: var(--text-secondary);
             font-size: 0.9rem;
-            margin-top: 60px;
+            background: #03050a;
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>Dureasa Ensene</h1>
-        <p>Senior BI Development & Operations | Data Engineer</p>
-        <div class="contact-links">
-            <a href="mailto:duresa8830@gmail.com">Email</a> | 
-            <a href="https://linkedin.com/in/duresa-ensene-009263272" target="_blank">LinkedIn</a> |
-            <a href="#">Portfolio Site</a>
+        <div class="status-badge">⚡ Available for Global Remote Opportunities</div>
+        <h1>Duresa Ensene</h1>
+        <p>Enterprise Data & Analytics Engineer specializing in massive ETL orchestration pipelines, transactional data mart modeling, and highly accessible system architectures for emerging global markets.</p>
+        <div class="cta-group">
+            <a href="mailto:duresas8830@gmail.com" class="btn-primary">Connect via Email</a>
+            <a href="https://linkedin.com/in/duresa-ensene-009263272" target="_blank" class="btn-secondary">View LinkedIn Profile</a>
         </div>
     </header>
 
     <div class="container">
         
-        <!-- About Section -->
-        <section id="about">
-            <h2>About Me</h2>
-            <p>Highly accomplished Business Intelligence and Data Engineering Specialist with over 3 years of experience leading enterprise-scale data architecture, automated ETL development, and complex reporting infrastructure within the telecommunications industry. Proven track record designing and engineering mission-critical data processing frameworks using Oracle PL/SQL, Apache Airflow, and Python to handle tens of millions of records.</p>
+        <!-- Engineering Manifesto -->
+        <section id="manifesto">
+            <h2>Engineering Executive Summary</h2>
+            <p style="font-size: 1.2rem; color: #d1d5db; max-width: 950px; text-align: justify;">
+                Data Engineer with over 3 years of hands-on technical operation within Tier-1 telecommunications networks. Expert at structuring, automating, and maintaining fault-tolerant data warehouses running massive daily computational threads (tens of millions of active database mutations). Specialized in implementing enterprise-grade relational layouts and modeling semantic performance layers, alongside a deep interest in formulating next-generation, low-barrier systemic architectures that clear transaction and socio-economic hurdles.
+            </p>
         </section>
 
-        <!-- Technical Stack -->
-        <section id="skills">
-            <h2>Core Technical Stack</h2>
-            <div class="skills-grid">
-                <div class="skill-card">
-                    <h3>Databases & Architecture</h3>
-                    <p>Oracle SQL, Advanced PL/SQL, Trino Engine, Data Warehousing, Query Optimization</p>
+        <!-- Technical Core Grid -->
+        <section id="matrix">
+            <h2>Technical Capability Matrix</h2>
+            <div class="matrix-grid">
+                <div class="matrix-box">
+                    <h3>Pipeline Orchestration & Scale</h3>
+                    <div class="tech-pill">Apache Airflow (DAG Engineering)</div>
+                    <div class="tech-pill">Python (Pandas / NumPy)</div>
+                    <div class="tech-pill">Asynchronous ETL Pipelines</div>
+                    <div class="tech-pill">Linux Shell Scripting</div>
+                    <div class="tech-pill">Git / Version Controlled Repos</div>
                 </div>
-                <div class="skill-card">
-                    <h3>Orchestration & Code</h3>
-                    <p>Apache Airflow (DAG design), Python (Pandas, NumPy), Shell Scripting, Git/GitHub</p>
+                <div class="matrix-box">
+                    <h3>Database Engineering & Analytics</h3>
+                    <div class="tech-pill">Advanced Oracle PL/SQL</div>
+                    <div class="tech-pill">Trino Distributed Query Engine</div>
+                    <div class="tech-pill">Star & Snowflake Dimensional Schemas</div>
+                    <div class="tech-pill">Execution Plan & Index Optimization</div>
                 </div>
-                <div class="skill-card">
-                    <h3>Business Intelligence</h3>
-                    <p>Power BI Desktop & Service, DAX Enterprise Modeling, Advanced UX/UI Dashboard Design</p>
+                <div class="matrix-box">
+                    <h3>Semantic Layers & BI</h3>
+                    <div class="tech-pill">Microsoft Fabric Ecosystem</div>
+                    <div class="tech-pill">Enterprise DAX Modeling</div>
+                    <div class="tech-pill">Power BI Data Hub Deployments</div>
+                    <div class="tech-pill">Advanced UX/UI Corporate Matrices</div>
                 </div>
             </div>
         </section>
 
-        <!-- Featured Projects / Experience -->
-        <section id="projects">
-            <h2>Featured Production Architectures</h2>
-            
-            <div class="project-card">
-                <div class="job-meta">
-                    <span>Enterprise Telecom ETL Automation Framework</span>
-                    <span>Safaricom Ethiopia</span>
+        <!-- Solutions & Production Implementations Portfolio -->
+        <section id="systems-showcase">
+            <h2>System Architectures & Production Pipelines</h2>
+            <div class="project-flex">
+                
+                <!-- System 1 -->
+                <div class="architecture-card">
+                    <div class="card-header-meta">
+                        <h3>M-PESA Telecom Transactional Data Mart</h3>
+                        <span class="sys-status status-prod">Production Architecture</span>
+                    </div>
+                    <p>Designed and deployed the end-to-end data processing layers standardizing accounting, transaction flows, and metric pipelines for multi-million subscriber fintech networks.</p>
+                    <ul class="spec-list">
+                        <li>Engineered and deployed **150+ custom production Oracle PL/SQL procedures** and **80+ structural packages** inside a core data warehouse framework.</li>
+                        <li>Built and maintained **90+ modular Apache Airflow DAGs**, establishing a broad live system of **over 150 production workflows** with active SLA metrics and auto-retry triggers.</li>
+                        <li>Significantly minimized database query execution latency across Finance, Commercial, and Technology groups via advanced indexing modifications and execution plan refactoring.</li>
+                    </ul>
                 </div>
-                <span class="tag">Apache Airflow</span><span class="tag">Python</span><span class="tag">Oracle PL/SQL</span>
-                <p>Engineered and scaled distributed pipeline orchestrations processing tens of millions of active telecom subscriber records daily.</p>
-                <ul>
-                    <li>Designed and put into production 90+ custom Apache Airflow DAGs to coordinate multi-system dependencies.</li>
-                    <li>Currently oversee a broad active catalog of more than 150 automated data transformation workflows.</li>
-                </ul>
-            </div>
 
-            <div class="project-card">
-                <div class="job-meta">
-                    <span>Centralized Oracle Data Warehouse Standardization</span>
-                    <span>Safaricom Ethiopia</span>
+                <!-- System 2 -->
+                <div class="architecture-card concept">
+                    <div class="card-header-meta">
+                        <h3>Aman: Low-Literacy Voice-First B2C Rental Ecosystem</h3>
+                        <span class="sys-status status-arch">System Design Blueprint</span>
+                    </div>
+                    <p>A visionary system architecture designed to solve systemic real estate informational gaps in emerging markets by bypassing structural literacy dependencies.</p>
+                    <ul class="spec-list">
+                        <li>**Interface Layer:** Built around a voice-first design that relies on speech-to-text processing, visual operational icons, and automated verbal contract generation.</li>
+                        <li>**Data Backend Integration:** Designed to query real-time dynamic price indexing tables to suppress artificial brokerage inflation, protected by unified national identification verification.</li>
+                        <li>**Transaction Logic:** Interfaces with standard mobile money APIs to secure immediate peer-to-peer verification and digital escrow logic with zero human intermediate points.</li>
+                    </ul>
                 </div>
-                <span class="tag">Oracle PL/SQL</span><span class="tag">Data Warehousing</span><span class="tag">Query Tuning</span>
-                <p>Modernized and standardized legacy structural reporting metrics into high-performance unified database modules.</p>
-                <ul>
-                    <li>Built, tested, and deployed over 150 custom PL/SQL procedures and 80 core enterprise data packages.</li>
-                    <li>Drastically minimized operational query latency across critical business domains by tuning index plans and refactoring queries.</li>
-                </ul>
-            </div>
-        </section>
 
-        <!-- Education & Certifications -->
-        <section id="credentials">
-            <h2>Education & Credentials</h2>
-            <p><strong>B.Sc. in Electronics and Electrical Engineering</strong> — Menschen für Menschen Foundation Technology College (GPA: 3.87/4.00, First Class Honors)</p>
-            <p style="margin-top: 10px;"><strong>Key Certifications:</strong> Microsoft Certified: Fabric Analytics Engineer Associate (In Progress) | Oracle Database SQL Specialist</p>
+                <!-- System 3 -->
+                <div class="architecture-card concept">
+                    <div class="card-header-meta">
+                        <h3>AI-Driven Agricultural Liquidity & Warehouse Receipt Ingestion</h3>
+                        <span class="sys-status status-arch">System Design Blueprint</span>
+                    </div>
+                    <p>An abstract structural framework designed to resolve the "harvest dilemma," preventing emergent crop devaluations by offering instant liquidity tracking to smallholder farmers.</p>
+                    <ul class="spec-list">
+                        <li>**Ingestion Layer:** Connects physical weight telemetry scales and automated quality logs to an immutable data ledger layer.</li>
+                        <li>**Financial Trigger Mechanism:** Generates high-security digital warehouse receipts mapped to official national registries, enabling instantaneous micro-liquidity processing.</li>
+                        <li>**Predictive Optimization:** Leverages timeseries modeling to track seasonal demand variations, prompting optimized asset releases and bypassing opportunistic middle-tier handlers.</li>
+                    </ul>
+                </div>
+
+            </div>
         </section>
 
     </div>
 
     <footer>
-        <p>&copy; 2026 Duresa Ensene. All rights reserved.</p>
+        <p>&copy; 2026 Duresa Ensene. Built for International Enterprise Engineering Deployment.</p>
     </footer>
 
 </body>
